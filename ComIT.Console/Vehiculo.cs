@@ -11,38 +11,58 @@ namespace ComIT.Console
         public int Año = 0;
         public string Color = "";
         public int VelocidadMaxima = 0;
+        public int CantidadRuedas = 0;
 
         private bool Encendido = false;
         private int VelocidadActual = 0;
+        private int Aceleracion = 20;
+
+        protected string TipoVehiculo = "";
+
+        public Vehiculo()
+        {
+
+        }
+
+        public Vehiculo(int aceleracion)
+        {
+            Aceleracion = aceleracion;
+        }
 
         public void Encender()
         {
             if (!Encendido)
             {
                 Encendido = true;
-                System.Console.WriteLine("El auto esta encendido");
+                System.Console.WriteLine($"{TipoVehiculo} encendido");
             }
             else
             { 
-                System.Console.WriteLine("El auto ya esta en marcha");
+                System.Console.WriteLine($"{TipoVehiculo} ya esta en marcha");
             }
         }
         public void Apagar()
         {
             if (Encendido)
             {
-                System.Console.WriteLine("El auto se apagó");
+                System.Console.WriteLine($"{TipoVehiculo} apagado");
             }
             else
             {
-                System.Console.WriteLine("El auto no esta encendido");
+                System.Console.WriteLine($"{TipoVehiculo} no esta encendido");
             }
         }
+
         public void Acelerar()
+        {
+            Acelerar(Aceleracion);
+        }
+
+        public void Acelerar(int aceleracion)
         {
             if (Encendido)
             {
-                VelocidadActual += 20;
+                VelocidadActual += aceleracion;
                 if (VelocidadActual > VelocidadMaxima)
                 {
                     System.Console.WriteLine($"La velocidad maxima es {VelocidadMaxima}. No se puede acelerar mas");
@@ -58,6 +78,7 @@ namespace ComIT.Console
                 System.Console.WriteLine("Antes de acelerar, prende el vehiculo");
             }
         }
+
         public void Frenar()
         {
             if (Encendido)
@@ -69,12 +90,12 @@ namespace ComIT.Console
                 }
                 else
                 {
-                    System.Console.WriteLine($"El vehiculo ya esta detenido");
+                    System.Console.WriteLine($"{TipoVehiculo} ya esta detenido");
                 }
             }
             else
             {
-                System.Console.WriteLine("El auto esta apagado.");
+                System.Console.WriteLine($"{TipoVehiculo} esta apagado.");
             }
         }
     }

@@ -241,10 +241,14 @@
 
 using ComIT.Console;
 
-Vehiculo vwUP = new Vehiculo();
+Console.WriteLine("Ejemplos con AUTOS");
+
+Auto vwUP = new Auto();
+Console.WriteLine($"Cantidad de ruedas: {vwUP.CantidadRuedas}");
 vwUP.Año = 2018;
 vwUP.Color = "Negro";
 vwUP.VelocidadMaxima = 140;
+vwUP.CantidadPuertas = 5;
 vwUP.Encender();
 //vwUP.Encendido = false;
 vwUP.Acelerar();
@@ -265,13 +269,39 @@ vwUP.Frenar();
 vwUP.Frenar();
 vwUP.Apagar();
 
-Vehiculo cronos = new Vehiculo();
+Auto cronos = new Auto();
+Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
 cronos.Año = 2023;
 cronos.Color = "Gris";
 cronos.VelocidadMaxima = 160;
+cronos.CantidadPuertas = 4;
 //cronos.Encendido = true;
+cronos.Encender();
 cronos.Acelerar();
 cronos.Apagar();
+
+Auto golf = new Auto(80);
+Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
+cronos.Año = 2024;
+cronos.Color = "Negro";
+cronos.VelocidadMaxima = 260;
+cronos.CantidadPuertas = 5;
+cronos.Encender();
+cronos.Acelerar();
+cronos.Frenar();
+cronos.Apagar();
+
+Console.WriteLine("Ejemplos con MOTOS");
+
+Moto vespa = new Moto();
+Console.WriteLine($"Cantidad de ruedas: {vespa.CantidadRuedas}");
+vespa.Color = "Amarilla";
+vespa.Año = 2010;
+vespa.VelocidadMaxima = 80;
+vespa.Encender();
+vespa.Acelerar();
+vespa.Frenar();
+vespa.Apagar();
 
 
 
