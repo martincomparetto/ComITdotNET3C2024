@@ -239,69 +239,110 @@
 
 
 
+//using ComIT.Console;
+
+//Console.WriteLine("Ejemplos con AUTOS");
+
+//Auto vwUP = new Auto();
+//Console.WriteLine($"Cantidad de ruedas: {vwUP.CantidadRuedas}");
+//vwUP.Año = 2018;
+//vwUP.Color = "Negro";
+//vwUP.VelocidadMaxima = 140;
+//vwUP.CantidadPuertas = 5;
+//vwUP.Encender();
+////vwUP.Encendido = false;
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Acelerar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Frenar();
+//vwUP.Apagar();
+
+//Auto cronos = new Auto();
+//Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
+//cronos.Año = 2023;
+//cronos.Color = "Gris";
+//cronos.VelocidadMaxima = 160;
+//cronos.CantidadPuertas = 4;
+////cronos.Encendido = true;
+//cronos.Encender();
+//cronos.Acelerar();
+//cronos.Apagar();
+
+//Auto golf = new Auto(80);
+//Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
+//cronos.Año = 2024;
+//cronos.Color = "Negro";
+//cronos.VelocidadMaxima = 260;
+//cronos.CantidadPuertas = 5;
+//cronos.Encender();
+//cronos.Acelerar();
+//cronos.Frenar();
+//cronos.Apagar();
+
+//Console.WriteLine("Ejemplos con MOTOS");
+
+//Moto vespa = new Moto();
+//Console.WriteLine($"Cantidad de ruedas: {vespa.CantidadRuedas}");
+//vespa.Color = "Amarilla";
+//vespa.Año = 2010;
+//vespa.VelocidadMaxima = 80;
+//vespa.Encender();
+//vespa.Acelerar();
+//vespa.Frenar();
+//vespa.Apagar();
+
 using ComIT.Console;
 
-Console.WriteLine("Ejemplos con AUTOS");
+Profesor profesor1 = new(28987654, "Juan", "Perez", new DateOnly(1980, 5, 1), 25);
+Curso curso1 = new("Aprendiendo .NET", 3, profesor1);
 
-Auto vwUP = new Auto();
-Console.WriteLine($"Cantidad de ruedas: {vwUP.CantidadRuedas}");
-vwUP.Año = 2018;
-vwUP.Color = "Negro";
-vwUP.VelocidadMaxima = 140;
-vwUP.CantidadPuertas = 5;
-vwUP.Encender();
-//vwUP.Encendido = false;
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Acelerar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Frenar();
-vwUP.Apagar();
+for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
+{
+    Console.WriteLine($"Ingrese el alumno numero {i}");
+    Console.Write("DNI: ");
+    long dni = long.Parse(Console.ReadLine());
+    Console.Write("Nombre: ");
+    string nombre = Console.ReadLine();
+    Console.Write("Apellido: ");
+    string apellido = Console.ReadLine();
 
-Auto cronos = new Auto();
-Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
-cronos.Año = 2023;
-cronos.Color = "Gris";
-cronos.VelocidadMaxima = 160;
-cronos.CantidadPuertas = 4;
-//cronos.Encendido = true;
-cronos.Encender();
-cronos.Acelerar();
-cronos.Apagar();
+    Console.Write("Fecha de Nacimiento (dd/mm/aaaa): "); // --> "23/11/1981"
+    string fecha = Console.ReadLine();
+    DateOnly fechaNacimiento = new DateOnly(int.Parse(fecha.Substring(6, 4)), int.Parse(fecha.Substring(3, 2)), int.Parse(fecha.Substring(0, 2)));
 
-Auto golf = new Auto(80);
-Console.WriteLine($"Cantidad de ruedas: {cronos.CantidadRuedas}");
-cronos.Año = 2024;
-cronos.Color = "Negro";
-cronos.VelocidadMaxima = 260;
-cronos.CantidadPuertas = 5;
-cronos.Encender();
-cronos.Acelerar();
-cronos.Frenar();
-cronos.Apagar();
+    Console.Write("Trabaja? (SI/NO): ");
+    bool trabaja = Console.ReadLine() == "SI";
 
-Console.WriteLine("Ejemplos con MOTOS");
+    Alumno alumno = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
+    curso1.Alumnos[i] = alumno;
+    //curso1.Alumnos[i] = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
+}
 
-Moto vespa = new Moto();
-Console.WriteLine($"Cantidad de ruedas: {vespa.CantidadRuedas}");
-vespa.Color = "Amarilla";
-vespa.Año = 2010;
-vespa.VelocidadMaxima = 80;
-vespa.Encender();
-vespa.Acelerar();
-vespa.Frenar();
-vespa.Apagar();
+//Alumno alumno1 = new(35632111, "Cristian", "Rodriguez", new DateOnly(2001, 10, 12), false);
+//curso1.Alumnos[0] = alumno1;
+
+Console.WriteLine($"Los alumnos del curso {curso1.Nombre} son:");
+for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
+{
+    Console.WriteLine($"Alumno {i + 1}: {curso1.Alumnos[i].Nombre} {curso1.Alumnos[i].Apellido}");
+}
+
+
+Curso curso2 = new("Aprendiendo a cocinar", 10, profesor1);
+
+
 
 
 
