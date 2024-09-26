@@ -11,14 +11,16 @@ namespace ComIT.Console
         public string Nombre = "";
         public int CantidadMaximaAlumnos = 0;
         public Profesor Profesor;
-        public Alumno[] Alumnos;
+        //public Alumno[] Alumnos;
+        public List<Alumno> Alumnos;
 
         public Curso(string nombreCurso, int cantidadMaximaAlumnos, Profesor profesor)
         {
             Nombre = nombreCurso;
             CantidadMaximaAlumnos = cantidadMaximaAlumnos;
             Profesor = profesor;
-            Alumnos = new Alumno[CantidadMaximaAlumnos];
+            //Alumnos = new Alumno[CantidadMaximaAlumnos];
+            Alumnos = new List<Alumno>();
         }
     }
 }

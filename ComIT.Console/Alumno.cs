@@ -15,5 +15,10 @@ namespace ComIT.Console
         {
             Trabaja = trabaja;
         }
+
+        public override string Saludo()
+        {
+            return "Buenos días Profesor";
+        }
     }
 }

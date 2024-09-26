@@ -304,43 +304,86 @@
 //vespa.Apagar();
 
 using ComIT.Console;
+using System.ComponentModel.DataAnnotations;
 
-Profesor profesor1 = new(28987654, "Juan", "Perez", new DateOnly(1980, 5, 1), 25);
-Curso curso1 = new("Aprendiendo .NET", 3, profesor1);
+//Profesor profesor1 = new(28987654, "Juan", "Perez", new DateOnly(1980, 5, 1), 25);
+//Curso curso1 = new("Aprendiendo .NET", 3, profesor1);
 
-for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
-{
-    Console.WriteLine($"Ingrese el alumno numero {i}");
-    Console.Write("DNI: ");
-    long dni = long.Parse(Console.ReadLine());
-    Console.Write("Nombre: ");
-    string nombre = Console.ReadLine();
-    Console.Write("Apellido: ");
-    string apellido = Console.ReadLine();
+//Curso curso2 = new("Aprendiendo a cocinar", 10, profesor1);
 
-    Console.Write("Fecha de Nacimiento (dd/mm/aaaa): "); // --> "23/11/1981"
-    string fecha = Console.ReadLine();
-    DateOnly fechaNacimiento = new DateOnly(int.Parse(fecha.Substring(6, 4)), int.Parse(fecha.Substring(3, 2)), int.Parse(fecha.Substring(0, 2)));
+//for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
+//{
+//    Console.WriteLine($"Ingrese el alumno numero {i}");
+//    Console.Write("DNI: ");
+//    long dni = long.Parse(Console.ReadLine());
+//    Console.Write("Nombre: ");
+//    string nombre = Console.ReadLine();
+//    Console.Write("Apellido: ");
+//    string apellido = Console.ReadLine();
 
-    Console.Write("Trabaja? (SI/NO): ");
-    bool trabaja = Console.ReadLine() == "SI";
+//    Console.Write("Fecha de Nacimiento (dd/mm/aaaa): "); // --> "23/11/1981"
+//    string fecha = Console.ReadLine();
+//    DateOnly fechaNacimiento = new DateOnly(int.Parse(fecha.Substring(6, 4)), int.Parse(fecha.Substring(3, 2)), int.Parse(fecha.Substring(0, 2)));
 
-    Alumno alumno = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
-    curso1.Alumnos[i] = alumno;
-    //curso1.Alumnos[i] = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
-}
+//    Console.Write("Trabaja? (SI/NO): ");
+//    bool trabaja = Console.ReadLine() == "SI";
 
-//Alumno alumno1 = new(35632111, "Cristian", "Rodriguez", new DateOnly(2001, 10, 12), false);
-//curso1.Alumnos[0] = alumno1;
+//    Alumno alumno = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
+//    //curso1.Alumnos[i] = alumno;
+//    //curso1.Alumnos[i] = new Alumno(dni, nombre, apellido, fechaNacimiento, trabaja);
+//    curso1.Alumnos.Add(alumno);
+//}
 
-Console.WriteLine($"Los alumnos del curso {curso1.Nombre} son:");
-for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
-{
-    Console.WriteLine($"Alumno {i + 1}: {curso1.Alumnos[i].Nombre} {curso1.Alumnos[i].Apellido}");
-}
+////Alumno alumno1 = new(35632111, "Cristian", "Rodriguez", new DateOnly(2001, 10, 12), false);
+////curso1.Alumnos[0] = alumno1;
+
+//Console.WriteLine($"Los alumnos del curso {curso1.Nombre} son:");
+////for (int i = 0; i < curso1.CantidadMaximaAlumnos; i++)
+////{
+////    Console.WriteLine($"Alumno {i + 1}: {curso1.Alumnos[i].Nombre} {curso1.Alumnos[i].Apellido}");
+////}
+//foreach (var alumno in curso1.Alumnos)
+//{
+//    //Console.WriteLine($"{alumno.Nombre} {alumno.Apellido}");
+//    Console.WriteLine(alumno.DevolverNombreCompleto());
+//}
 
 
-Curso curso2 = new("Aprendiendo a cocinar", 10, profesor1);
+//string nombreBuscar = "Martin";
+//Alumno? alumnoEncontrado = curso1.Alumnos.Find(a => a.Nombre == nombreBuscar);
+
+//if (alumnoEncontrado == null)
+//{
+//    Console.WriteLine("No se encontró a Martin");
+//}
+//else
+//{
+//    Console.WriteLine(alumnoEncontrado.DNI);
+//}
+
+//List<Alumno> alumnosEncontrados = curso1.Alumnos.FindAll(a => a.Nombre == nombreBuscar);
+
+Profesor profesor = new Profesor(29047312, "Martin", "Comparetto", new DateOnly(1981, 11, 23), 20);
+//profesor.NombreCompleto = "Juan Perez";
+//var nombreCompleto = profesor.NombreCompleto;
+
+//Console.WriteLine(profesor.NombreCompleto);
+
+Alumno alumno = new Alumno(35687779, "Antonio", "Gomez", new DateOnly(2003, 10, 5), false);
+
+
+Console.WriteLine(profesor.DevolverNombreCompleto());
+Console.WriteLine(alumno.DevolverNombreCompleto());
+
+Console.WriteLine(profesor.Saludo());
+Console.WriteLine(alumno.Saludo());
+
+
+//Persona persona = new Persona(12333666, "Juan", "Perez", new DateOnly(1981, 11, 23));
+
+
+
+
 
 
 
