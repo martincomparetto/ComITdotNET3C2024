@@ -1,5 +1,5 @@
 ﻿@page "/profesor"
-@using ComIT.CursosApp.Entities
+@using ComIT.Comunes.Entities
 @rendermode InteractiveServer
 
 <h1>Profesor</h1>
@@ -24,6 +24,10 @@
 <label>
     Años experiencia
     <input type="number" @bind="AñosExperiencia" />
+</label>
+<label>
+    Materia
+    <input type="text" @bind="Materia" />
 </label>
 
 @if (EstamosModificando)
@@ -50,6 +54,7 @@ else
             <th>Apellido</th>
             <th>Fecha nacimiento</th>
             <th>Años experiencia</th>
+            <th>Materia</th>
             <th></th>
         </tr>
     </thead>
@@ -62,6 +67,7 @@ else
                 <td>@item.Apellido</td>
                 <td>@item.FechaNacimiento</td>
                 <td>@item.AñosExperiencia</td>
+                <td>@item.Materia</td>
                 <td>
                     <button type="button" class="btn btn-link" @onclick="() => Modificar(item)">Modificar</button>
                     <button type="button" class="btn btn-link" @onclick="() => Eliminar(item)">Eliminar</button>
@@ -84,6 +90,7 @@ else
     private string Apellido = "";
     private DateOnly? FechaNacimiento;
     private int AñosExperiencia = 0;
+    private string Materia = "";
 
     private List<Profesor> ProfesoresList = new();
 
@@ -95,13 +102,14 @@ else
         }
         else
         {
-            ProfesoresList.Add(new Profesor(DNI, Nombre, Apellido, (DateOnly)FechaNacimiento, AñosExperiencia));
+            ProfesoresList.Add(new Profesor(DNI, Nombre, Apellido, (DateOnly)FechaNacimiento, AñosExperiencia, Materia));
 
             DNI = 0;
             Nombre = "";
             Apellido = "";
             FechaNacimiento = null;
             AñosExperiencia = 0;
+            Materia = "";
 
             CantidadProfesores++;
             MensajeError = "";
@@ -118,6 +126,7 @@ else
         Apellido = profesorModificar.Apellido;
         FechaNacimiento = profesorModificar.FechaNacimiento;
         AñosExperiencia = profesorModificar.AñosExperiencia;
+        Materia = profesorModificar.Materia;
     }
 
     private void GuardarCambios()
@@ -133,12 +142,14 @@ else
             ProfesorModificando.Apellido = Apellido;
             ProfesorModificando.FechaNacimiento = (DateOnly)FechaNacimiento;
             ProfesorModificando.AñosExperiencia = AñosExperiencia;
+            ProfesorModificando.Materia = Materia;
 
             DNI = 0;
             Nombre = "";
             Apellido = "";
             FechaNacimiento = null;
             AñosExperiencia = 0;
+            Materia = "";
 
             EstamosModificando = false;
             ProfesorModificando = null;

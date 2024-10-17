@@ -303,6 +303,7 @@
 //vespa.Frenar();
 //vespa.Apagar();
 
+using ComIT.Comunes.Entities;
 using ComIT.Console;
 using System.ComponentModel.DataAnnotations;
 
@@ -363,7 +364,7 @@ using System.ComponentModel.DataAnnotations;
 
 //List<Alumno> alumnosEncontrados = curso1.Alumnos.FindAll(a => a.Nombre == nombreBuscar);
 
-Profesor profesor = new Profesor(29047312, "Martin", "Comparetto", new DateOnly(1981, 11, 23), 20);
+Profesor profesor = new Profesor(29047312, "Martin", "Comparetto", new DateOnly(1981, 11, 23), 20, "Programación");
 //profesor.NombreCompleto = "Juan Perez";
 //var nombreCompleto = profesor.NombreCompleto;
 
