@@ -303,9 +303,10 @@
 //vespa.Frenar();
 //vespa.Apagar();
 
-using ComIT.Comunes.Entities;
-using ComIT.Console;
-using System.ComponentModel.DataAnnotations;
+//using ComIT.Comunes.Entities;
+//using ComIT.Console;
+//using ComIT.Console.OtroEspacio;
+//using System.ComponentModel.DataAnnotations;
 
 //Profesor profesor1 = new(28987654, "Juan", "Perez", new DateOnly(1980, 5, 1), 25);
 //Curso curso1 = new("Aprendiendo .NET", 3, profesor1);
@@ -364,25 +365,32 @@ using System.ComponentModel.DataAnnotations;
 
 //List<Alumno> alumnosEncontrados = curso1.Alumnos.FindAll(a => a.Nombre == nombreBuscar);
 
-Profesor profesor = new Profesor(29047312, "Martin", "Comparetto", new DateOnly(1981, 11, 23), 20, "Programación");
-//profesor.NombreCompleto = "Juan Perez";
-//var nombreCompleto = profesor.NombreCompleto;
+//Profesor profesor = new Profesor(29047312, "Martin", "Comparetto", new DateOnly(1981, 11, 23), 20, "Programación");
+////profesor.NombreCompleto = "Juan Perez";
+////var nombreCompleto = profesor.NombreCompleto;
 
-//Console.WriteLine(profesor.NombreCompleto);
+////Console.WriteLine(profesor.NombreCompleto);
 
-Alumno alumno = new Alumno(35687779, "Antonio", "Gomez", new DateOnly(2003, 10, 5), false);
+//Alumno alumno = new Alumno(35687779, "Antonio", "Gomez", new DateOnly(2003, 10, 5), false);
 
 
-Console.WriteLine(profesor.DevolverNombreCompleto());
-Console.WriteLine(alumno.DevolverNombreCompleto());
+//Console.WriteLine(profesor.DevolverNombreCompleto());
+//Console.WriteLine(alumno.DevolverNombreCompleto());
 
-Console.WriteLine(profesor.Saludo());
-Console.WriteLine(alumno.Saludo());
+//Console.WriteLine(profesor.Saludo());
+//Console.WriteLine(alumno.Saludo());
 
 
 //Persona persona = new Persona(12333666, "Juan", "Perez", new DateOnly(1981, 11, 23));
 
 
+
+using ComIT.Console;
+using ComIT.Console.OtroEspacio;
+
+PruebaNamespace pruebaNamespace = new();
+NamespaceDos namespaceDos = new();
+Auto auto = new();
 
 
 
