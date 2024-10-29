@@ -1,14 +1,13 @@
-﻿using ComIT.Comunes.Entities;
-using CursosApp.Context;
+﻿using CursosApp.Context;
+using CursosApp.Model;
 using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CursosApp.Components.Pages.Profesores
 {
     public partial class ProfesorPage
     {
         [Inject]
-        public ApplicationDbContext Context { get; set; } = default;
+        private CursosAppContext context { get; set; } = default;
 
         private string MensajeError = "";
         private bool EstamosModificando = false;
@@ -22,13 +21,23 @@ namespace CursosApp.Components.Pages.Profesores
         private int AñosExperiencia = 0;
         private string Materia = "";
 
-        private List<Profesor> ProfesoresList = new();
+        private List<Profesor>? ProfesoresList;
 
         private ProfesorModal modal = default!;
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            GetData();
+        }
+
+        private void GetData()
+        {
+            ProfesoresList = context.Profesores.ToList();
+        }
+
         private void NuevoProfesor()
         {
-            var listados = Context.Pruebas.ToList();
             ProfesorModificando = new Profesor();
             modal.Open();
         }
@@ -43,12 +52,16 @@ namespace CursosApp.Components.Pages.Profesores
             {
                 if (!EstamosModificando)
                 {
-                    Context.Pruebas.Add(new Entities.Prueba() { Nombre = "Prueba" });
-                    Context.SaveChanges();
-                    ProfesoresList.Add(ProfesorModificando);
+                    context.Profesores.Add(ProfesorModificando);
+                    var actu = context.SaveChanges();
+
+                    GetData();
                 }
                 else
                 {
+                    context.Entry(ProfesorModificando).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
+                    GetData();
                     EstamosModificando = false;
                 }
 
@@ -68,7 +81,9 @@ namespace CursosApp.Components.Pages.Profesores
 
         private void Eliminar(Profesor profesorEliminar)
         {
-            ProfesoresList.Remove(profesorEliminar);
+            context.Profesores.Remove(profesorEliminar);
+            context.SaveChanges();
+            GetData();
         }
     }
 }
