@@ -1,4 +1,4 @@
-﻿using ComIT.Comunes.Entities;
+﻿using CursosApp.Model;
 
 namespace CursosApp.Components.Pages.Profesores
 {
