@@ -11,6 +11,9 @@ namespace ComIT.Comunes.Entities
         public int AñosExperiencia = 0;
         public string Materia = "";
 
+        public Profesor() : base()
+        { }
+
         public Profesor(long dni, string nombre, string apellido, DateOnly fechaNacimiento, int añosExperiencia, string materia) 
             : base(dni, nombre, apellido, fechaNacimiento)
         {

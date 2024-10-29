@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,10 @@ namespace ComIT.Comunes.Entities
 {
     public abstract class Persona
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         public long DNI = 0;
         public string Nombre = string.Empty;
         public string Apellido = string.Empty;
@@ -25,6 +31,9 @@ namespace ComIT.Comunes.Entities
                 //System.Console.WriteLine("Me guardaron un valor");
             }
         }
+
+        public Persona()
+        { }
 
         public Persona(long dni, string nombre, string apellido, DateOnly fechaNacimiento)
         {

@@ -1,52 +1,12 @@
 ﻿@page "/profesor"
-@using ComIT.Comunes.Entities
 @inject NavigationManager navigation
 @rendermode InteractiveServer
 
 <h1>Profesor</h1>
 
-@* <h3>Nuevo profesor</h3>
-<label>
-    DNI
-    <input type="number" @bind="DNI" />
-</label>
-<label>
-    Nombre
-    <input type="text" @bind="Nombre" />
-</label>
-<label>
-    Apellido
-    <input type="text" @bind="Apellido" />
-</label>
-<label>
-    Fecha nacimiento
-    <input type="date" @bind="FechaNacimiento" />
-</label>
-<label>
-    Años experiencia
-    <input type="number" @bind="AñosExperiencia" />
-</label>
-<label>
-    Materia
-    <input type="text" @bind="Materia" />
-</label>
+<ProfesorModal @ref="modal" Data="ProfesorModificando" GuardarEventCallback="Guardar" Modificando="EstamosModificando" />
 
-@if (EstamosModificando)
-{
-    <button type="button" class="btn btn-primary" @onclick="GuardarCambios">Guardar Cambios</button>
-}
-else
-{
-    <button type="button" class="btn btn-primary" @onclick="Agregar">Agregar profesor</button>
-}
-<br />
-
-@if (MensajeError != "")
-{
-    <label style="background-color: red;">@MensajeError</label>
-} *@
-
-<button class="btn-primary" @onclick="NuevoProfesor">Nuevo</button>
+<button type="button" class="btn btn-primary" @onclick="NuevoProfesor">Nuevo</button>
 
 <ProfesoresListado Datos="@ProfesoresList" MostrarBotones="true" ModificarEvent="Modificar" EliminarEvent="Eliminar">
 </ProfesoresListado>

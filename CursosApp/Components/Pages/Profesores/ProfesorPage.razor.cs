@@ -1,11 +1,17 @@
-﻿using ComIT.Comunes.Entities;
+﻿using CursosApp.Context;
+using CursosApp.Model;
+using Microsoft.AspNetCore.Components;
 
 namespace CursosApp.Components.Pages.Profesores
 {
     public partial class ProfesorPage
     {
+        [Inject]
+        private CursosAppContext context { get; set; } = default;
+
         private string MensajeError = "";
         private bool EstamosModificando = false;
+        
         private Profesor? ProfesorModificando;
 
         private long DNI = 0;
@@ -14,29 +20,54 @@ namespace CursosApp.Components.Pages.Profesores
         private DateOnly? FechaNacimiento;
         private int AñosExperiencia = 0;
         private string Materia = "";
-        private List<Profesor> ProfesoresList = new();
+
+        private List<Profesor>? ProfesoresList;
+
+        private ProfesorModal modal = default!;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            GetData();
+        }
+
+        private void GetData()
+        {
+            ProfesoresList = context.Profesores.ToList();
+        }
 
         private void NuevoProfesor()
-        { }
-
-        private void Agregar()
         {
-            if (DNI == 0 || Nombre == "" || Apellido == "" || FechaNacimiento == null)
+            ProfesorModificando = new Profesor();
+            modal.Open();
+        }
+
+        private void Guardar()
+        {
+            if (ProfesorModificando.DNI == 0 || ProfesorModificando.Nombre == "" || ProfesorModificando.Apellido == "" || ProfesorModificando.FechaNacimiento == null)
             {
                 MensajeError = "No se ingresaron todos los datos del profesor";
             }
             else
             {
-                ProfesoresList.Add(new Profesor(DNI, Nombre, Apellido, (DateOnly)FechaNacimiento, AñosExperiencia, Materia));
+                if (!EstamosModificando)
+                {
+                    context.Profesores.Add(ProfesorModificando);
+                    var actu = context.SaveChanges();
 
-                DNI = 0;
-                Nombre = "";
-                Apellido = "";
-                FechaNacimiento = null;
-                AñosExperiencia = 0;
-                Materia = "";
+                    GetData();
+                }
+                else
+                {
+                    context.Entry(ProfesorModificando).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
+                    GetData();
+                    EstamosModificando = false;
+                }
 
+                ProfesorModificando = null;
                 MensajeError = "";
+                modal.Close();
             }
         }
 
@@ -45,44 +76,14 @@ namespace CursosApp.Components.Pages.Profesores
             EstamosModificando = true;
             ProfesorModificando = profesorModificar;
 
-            DNI = profesorModificar.DNI;
-            Nombre = profesorModificar.Nombre;
-            Apellido = profesorModificar.Apellido;
-            FechaNacimiento = profesorModificar.FechaNacimiento;
-            AñosExperiencia = profesorModificar.AñosExperiencia;
-            Materia = profesorModificar.Materia;
-        }
-
-        private void GuardarCambios()
-        {
-            if (DNI == 0 || Nombre == "" || Apellido == "" || FechaNacimiento == null)
-            {
-                MensajeError = "No se ingresaron todos los datos del profesor";
-            }
-            else
-            {
-                ProfesorModificando.DNI = DNI;
-                ProfesorModificando.Nombre = Nombre;
-                ProfesorModificando.Apellido = Apellido;
-                ProfesorModificando.FechaNacimiento = (DateOnly)FechaNacimiento;
-                ProfesorModificando.AñosExperiencia = AñosExperiencia;
-                ProfesorModificando.Materia = Materia;
-
-                DNI = 0;
-                Nombre = "";
-                Apellido = "";
-                FechaNacimiento = null;
-                AñosExperiencia = 0;
-                Materia = "";
-
-                EstamosModificando = false;
-                ProfesorModificando = null;
-            }
+            modal.Open();
         }
 
         private void Eliminar(Profesor profesorEliminar)
         {
-            ProfesoresList.Remove(profesorEliminar);
+            context.Profesores.Remove(profesorEliminar);
+            context.SaveChanges();
+            GetData();
         }
     }
 }
