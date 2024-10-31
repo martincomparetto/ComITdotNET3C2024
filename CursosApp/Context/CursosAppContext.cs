@@ -11,5 +11,6 @@ namespace CursosApp.Context
 
         public DbSet<Profesor> Profesores { get; set; }
         public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Alumno> Alumnos { get; set; }
     }
 }

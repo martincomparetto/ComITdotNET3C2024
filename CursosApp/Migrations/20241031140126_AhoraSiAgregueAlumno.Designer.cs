@@ -4,6 +4,7 @@ using CursosApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursosApp.Migrations
 {
     [DbContext(typeof(CursosAppContext))]
-    partial class CursosAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241031140126_AhoraSiAgregueAlumno")]
+    partial class AhoraSiAgregueAlumno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +35,6 @@ namespace CursosApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CursoID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<long>("DNI")
                         .HasColumnType("bigint");
 
@@ -49,8 +49,6 @@ namespace CursosApp.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CursoID");
 
                     b.ToTable("Alumnos");
                 });
@@ -110,13 +108,6 @@ namespace CursosApp.Migrations
                     b.ToTable("Profesores");
                 });
 
-            modelBuilder.Entity("CursosApp.Model.Alumno", b =>
-                {
-                    b.HasOne("CursosApp.Model.Curso", null)
-                        .WithMany("AlumnoList")
-                        .HasForeignKey("CursoID");
-                });
-
             modelBuilder.Entity("CursosApp.Model.Curso", b =>
                 {
                     b.HasOne("CursosApp.Model.Profesor", "ProfesorPrincipal")
@@ -126,11 +117,6 @@ namespace CursosApp.Migrations
                         .IsRequired();
 
                     b.Navigation("ProfesorPrincipal");
-                });
-
-            modelBuilder.Entity("CursosApp.Model.Curso", b =>
-                {
-                    b.Navigation("AlumnoList");
                 });
 #pragma warning restore 612, 618
         }

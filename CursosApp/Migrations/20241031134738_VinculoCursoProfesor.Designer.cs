@@ -4,6 +4,7 @@ using CursosApp.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursosApp.Migrations
 {
     [DbContext(typeof(CursosAppContext))]
-    partial class CursosAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241031134738_VinculoCursoProfesor")]
+    partial class VinculoCursoProfesor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,39 +24,6 @@ namespace CursosApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CursosApp.Model.Alumno", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CursoID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<long>("DNI")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateOnly?>("FechaNacimiento")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Trabaja")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CursoID");
-
-                    b.ToTable("Alumnos");
-                });
 
             modelBuilder.Entity("CursosApp.Model.Curso", b =>
                 {
@@ -110,13 +80,6 @@ namespace CursosApp.Migrations
                     b.ToTable("Profesores");
                 });
 
-            modelBuilder.Entity("CursosApp.Model.Alumno", b =>
-                {
-                    b.HasOne("CursosApp.Model.Curso", null)
-                        .WithMany("AlumnoList")
-                        .HasForeignKey("CursoID");
-                });
-
             modelBuilder.Entity("CursosApp.Model.Curso", b =>
                 {
                     b.HasOne("CursosApp.Model.Profesor", "ProfesorPrincipal")
@@ -126,11 +89,6 @@ namespace CursosApp.Migrations
                         .IsRequired();
 
                     b.Navigation("ProfesorPrincipal");
-                });
-
-            modelBuilder.Entity("CursosApp.Model.Curso", b =>
-                {
-                    b.Navigation("AlumnoList");
                 });
 #pragma warning restore 612, 618
         }
